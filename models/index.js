@@ -7,7 +7,8 @@ const Configuration = require("../config");
 
 var sequelize = new Sequelize({
     dialect: Configuration.database.dialect,
-    storage: Configuration.database.storage
+    storage: Configuration.database.storage,
+    logging: Configuration.database.logging
 });
 
 var db = {};

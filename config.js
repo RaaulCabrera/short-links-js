@@ -5,7 +5,8 @@ var config = {};
 
 config.database = {
     "dialect": "sqlite",
-    "storage": "./storage/shortlinks.db"
+    "storage": "./storage/shortlinks.db",
+    "logging": false
 };
 
 config.server = {
