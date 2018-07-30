@@ -6,18 +6,34 @@ const ShortLinks = models.ShortLinks;
 module.exports = {
 
     create: function(req, resp) {
-        const originalLink = req.body.url;
-        const hostname = req.app.get("self_url");
-        const shortKey = shortid.generate();
 
-        ShortLinks.build({
-             original: originalLink, shortKey: shortKey 
-        }).save().then(function(){
-            resp.json({
-                'short': hostname + shortKey,
-                'original':originalLink
-            });
-        }).catch(function(error) {
+        var urls = [];
+
+        if(Array.isArray(req.body)) {
+            urls = req.body;
+        } else if(req.body.url && typeof req.body.url == "string") {
+            urls.push(req.body.url);
+        }
+
+        var shortLinks = [];
+        var tasks = [];
+        const hostname = req.app.get("self_url");
+
+        urls.forEach(function(url) {
+            const key = shortid.generate();
+            const shortLink = {
+                original: url,
+                short: hostname + key
+            };
+            shortLinks.push(shortLink);
+            tasks.push(
+                ShortLinks.build({ original: url, shortKey: key }).save()
+            )
+        });
+
+        Promise.all(tasks).then(function(){
+            resp.json(shortLinks);
+        }).catch(function(error){
             resp.status(500);
             resp.json({
                 'error': 'Unable to create a short-link'
