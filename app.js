@@ -31,14 +31,17 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set("hostname", Configuration.server.domain);
+app.set("self_url", Configuration.server.url);
 
 // Import controllers
 const shortLinksController = require("./controllers/shortLinkController");
 
 // restful api routes
-app.post('/api/short-links/', (req, res) => shortLinksController.create(req, res));
+app.post('/', (req, res) => shortLinksController.create(req, res));
+app.get('/:shortURL', (req, res) => shortLinksController.get(req, res));
 
 
 // Run the application
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+var server = app.listen(3000, () => console.log('Example app listening on port 3000!'));
+
+module.exports = server;

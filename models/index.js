@@ -4,7 +4,7 @@ const Sequelize = require("sequelize");
 
 // System comfiguration
 const Configuration = require("../config");
-console.log(Configuration);
+
 var sequelize = new Sequelize({
     dialect: Configuration.database.dialect,
     storage: Configuration.database.storage
@@ -28,7 +28,5 @@ Object.keys(db).forEach(function (modelName) {
 sequelize.sync();
 
 db.sequelize = sequelize;
-
-console.log("db", db);
 
 module.exports = db;

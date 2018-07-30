@@ -9,7 +9,8 @@ config.database = {
 };
 
 config.server = {
-    'domain': 'http://127.0.0.1/'
+    'url': 'http://127.0.0.1:3000/',
+    'port' : 3000
 };
 
 
