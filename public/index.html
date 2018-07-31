@@ -11,13 +11,39 @@
 
         <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="/assets/mustachejs/mustache.min.js"></script>
+    <script src="/assets/clipboardjs/clipboard.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    <style>
+    .td-break-all {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    </style>
   </head>
   <body>
-
+    <script id="tmpl-short-urls" type="x-tmpl-mustache">
+        {{#urls}}
+        <tr>
+            <td>#{{fn}}</td>
+            <td class="td-break-all">
+                <a href="{{original}}">{{original}}</a>
+            </td>
+            <td>
+                <a id="url-{{current}}" href="{{short}}">{{short}}</a>
+            </td>
+            <td>
+                <button class="btn btn-light btn-sm" data-clipboard-target="#url-{{current}}" data-toggle="tooltip" data-placement="left" title="Copied!">Copy</button>
+            </td>
+        </tr>
+        {{/urls}}
+    </script>
+    
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
@@ -35,6 +61,17 @@
         <div class="row">
             <div class="col-12 text-center">
                 <button id="process-btn" type="button" class="btn btn-primary" style="margin-top: 10px">Process</button>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <div class="table-responsive">
+                <table id="tbl-short-urls" class="table table-hover table-sm" style="margin-top: 10px;">
+                    <tbody>
+                    </tbody>
+                </table>
+                </div>
+
             </div>
         </div>
     </div>
