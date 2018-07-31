@@ -1,6 +1,6 @@
 # shrt
 
-This project is a simple web application for short url creation througth an RESTful API.
+This project is a simple web application for short url creation througth a RESTful API.
 The documentation of the api is here: https://documenter.getpostman.com/view/4981940/RWTeVMhd
 In order to install the application follow this steps:
 
