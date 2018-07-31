@@ -15,6 +15,12 @@ module.exports = {
             urls.push(req.body.url);
         }
 
+        if(urls.length > 100) {
+            resp.send(500);
+            resp.json("You could not send too many urls");
+            return;
+        }
+
         var shortLinks = [];
         var tasks = [];
         const hostname = req.app.get("self_url");
@@ -45,6 +51,11 @@ module.exports = {
     get: function(req, resp) {
         const shortURL = req.params.shortURL;
         ShortLinks.findOne({ where: { shortKey: shortURL } }).then(function(url) {
+            if(!url) {
+                resp.status(404);
+                resp.json("Content Not Fond!");
+                return;
+            }
             resp.redirect(url.original);
         });
     }

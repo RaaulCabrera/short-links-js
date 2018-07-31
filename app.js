@@ -17,12 +17,14 @@ const Sequelize = require('sequelize');
 // Configure the middleware
 const app = express();
 
+app.use(express.static('public'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set("self_url", Configuration.server.url);
 
-app.use(express.static('public'));
+
 
 // Import controllers
 const shortLinksController = require("./controllers/shortLinkController");
