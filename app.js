@@ -1,10 +1,4 @@
-/**
-//TODO
-Extras
-Crear una interfaz web que permita a los usuarios enviar una url para acortarla.
-Agregar a la interfaz una opción para enviar un archivo de texto lleno de URL's, esto deberá ser enviado a la API masiva. Los resultados pueden presentarse directamente en la página y descargarse como un archivo de texto.
-Agregar una vista para listar todas las URL's y su versión corta.
- */
+
 const Configuration = require("./config");
 
 
